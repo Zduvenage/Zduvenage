@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="height=window-height, initial-scale=0.95">
+ 
+<title>ADPI-uf UI</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+
+/*Faces*/ 
+.face {
+    position: absolute;
+    width: 288px; /* Adjusted width to account for gaps between sides */
+    height: 288px; /* Adjusted height to account for gaps between sides */
+    background-color: aquamarine;    
+    z-index: 3;
+    transform-style: preserve-3d;}
+    
+    .InnerTopHorizontal {
+        top: 0;
+        width: 100%;
+        height: 12px;}
+        
+    .InnerBottomHorizontal {
+        bottom: 0;
+        width: 100%;
+        height: 12px;}
+    .InnerLeftVertical {
+        left: 0;
+        width: 12px;
+        height: 100%;
+        writing-mode: vertical-rl;}
+
+    .InnerRightVertical {
+        right: 0;
+        width: 12px;
+        height: 100%;
+        writing-mode: vertical-rl; }
+
+    .front .InnerTopHorizontal,
+    .front .InnerBottomHorizontal,
+    .front .InnerLeftVertical,
+    .front .InnerRightVertical,
+    .right .InnerTopHorizontal,
+    .right .InnerBottomHorizontal,    
+    .right .InnerLeftVertical,   
+    .right .InnerRightVertical,
+    .back .InnerTopHorizontal,
+    .back .InnerBottomHorizontal,
+    .back .InnerLeftVertical,
+    .back .InnerRightVertical,
+    .left .InnerTopHorizontal,
+    .left .InnerBottomHorizontal,
+    .left .InnerLeftVertical,
+    .left .InnerRightVertical,   
+    .bottom .InnerTopHorizontal,
+    .bottom .InnerBottomHorizontal,  
+    .bottom .InnerLeftVertical,
+    .bottom .InnerRightVertical,
+    .top .InnerTopHorizontal,
+    .top .InnerBottomHorizontal,
+    .top .InnerLeftVertical,
+    .top .InnerRightVertical
+     {  position: absolute;
+        font-size: 10px;
+        font-family:verdana;
+        color: white;
+        text-align:center;
+        background-color:rgb(38, 0, 252);
+        z-index: 800; }
+
+    .plane-container {
+    width: 288px;
+    height: 288px; /* Adjusted height to 10px */
+    position: absolute;
+
+    left: 50%;
+    top: 50% ;   
+    transform: translate(-50%, -50%);
+    z-index:2;}
+
+ 
+
+.front {transform: translateZ(144px);}
+.back {transform: translateZ(-144px) rotateY(180deg);}
+.left {transform: translateX(-144px) rotateY(-90deg);}
+.right {transform: translateX(144px) rotateY(90deg);}
+.top {transform: translateY(-144px) rotateX(90deg);}
+.bottom {transform: translateY(144px) rotateX(-90deg);}
+
+/* Cube */
+#cube-container {
+  perspective: 1200px;
+  width: 288px;
+  height: 288px;
+  margin: auto;
+  position: relative;
+  top: 22px;}
+#cube {
+    width: 288px;
+  height: 288px;
+  transform-style: preserve-3d;
+  animation: initialRotation 5s ;
+  transition: transform 0.2s;}
+.initial-rotation {
+  transform: rotateX(90deg) rotateY(90deg);}
+@keyframes initialRotation {
+  0% {
+    transform: rotateX(0deg) rotateY(0deg); }
+  100% {
+    transform: rotateX(360deg) rotateY(360deg); }}
+
+#cube:hover {
+  animation: none; /* Stop the initial rotation animation on hover */
+  transform: rotateX(0deg) rotateY(0deg); /* Set the cube to its initial position */
+  cursor: pointer; /* Change the cursor to a pointer when hovering over the cube */}
+@keyframes fall {
+            0% {
+                transform: perspective(1200px) translate3d(0, 0px, 0px) rotateX(0deg);
+                transform-origin: bottom;
+            }
+            100% {
+                transform: perspective(4700px) translate3d(0px,0px, 140px) rotateX(-180deg) ;
+                 transform-origin: bottom;
+                style:"main-container";
+                background-color: #000;
+                opacity:0;
+                z-index: 1;
+            
+            }}
+/*---inner--*/
+/*inside buttons*/  
+ 
+
+.evBotBan {
+    position: absolute;
+    width: 100%; /* Adjusted width to account for gaps between sides */
+    height: 15%;
+    bottom: 10px; /* Adjusted height to account for gaps between sides */
+    background-color: rgb(255, 185, 127);    
+    z-index: 11;
+}
+
+
+/*---inner--*/  
+    /* Define a container to hold the column layout */
+    .cntnr {
+            position: absolute;
+            left: 12px; /* Adjust the top position as needed */
+            bottom: 10px; /* Adjust the left position as needed */}
+
+        .itm {
+            display: flex;
+     
+            margin-bottom: 10px;
+            left: 50px;
+  
+            width:200px;}
+
+        .nbt {
+            background-color: rgb(231, 31, 31);
+            padding: 2px 8px;}
+        .nbt-hover:hover {
+        transform: scale(0.95);
+
+        animation: colorChange 2s infinite;
+        color: rgb(248, 208, 30);
+        border-color: #fa0b0b;
+        margin-top: 4px;
+        margin-left: 20 px;}
+        .wrd {
+            background-color:transparent;
+            margin-left: 20px;
+            width:144px;
+            padding: 5px;
+            align-items: center;
+            font-style: verdana;
+            font-size: 20px;}
+
+/*inside buttons*/ 
+/*Buttons*/
+/*distict buttons with distict features*/
+.button-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;}
+.isub {
+    position: absolute;
+    width: 20px;
+    left: 0px;}
+
+
+.but-c button {
+  margin: 10px 0; /* Adjust the vertical margin as needed */}
+.FsNb {
+    padding: 4px;
+    width: 100%;
+    right: 10px;}
+ 
+ 
+    /*distict buttons with distict features*/
+    .bks-butt {
+        left: 15px;
+
+    }
+   
+   
+    .bks-butt-R {
+        position: absolute;
+    bottom: 20px;
+    right: 15px;
+    left: 13px;
+    height: 20px;
+    z-index: 11;    }
+/*BS_styles Default*/
+    .button-row {
+        position: absolute;
+        display: flex;
+        justify-content: space-between; /* Distribute buttons evenly */
+}
+
+    .custom-button {
+        background-color: rgb(1, 246, 144); /* Background color specified with @CBC@ placeholder */
+        border: 1px solid #0e0d0d;
+        border-radius: 2px;
+        padding: 2px;
+        color: black; /* Text color set to black */
+        font-size: 12px; /* Font size set to 12 */
+        font-family: Arial, sans-serif; /* Easily readable font */
+        font-weight: bold;
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        transition: transform 0.2s ease, background-color 0.8s ease, color 0.2s ease, border-color 0.2s ease;
+        text-decoration: none;
+        text-align: center;
+        flex-grow: 1; /* Allow buttons to grow equally within the row */
+        margin-right: 10px;}
+
+    .custom-button:hover {
+        transform: scale(0.95);
+        background-color: gold;
+        animation: colorChange 2s infinite;
+        color: rgb(0, 0, 0);
+        border-color: rgb(157, 4, 4);}
+
+    @keyframes colorChange {
+        66% { background-color: darkblue; }
+        100% { background-color: rgb(216, 162, 26); }}
+
+
+/*distict buttons with distict features*/
+/*Butotns_end*/
+/* individual button links with distinct features not same as default above*/
+
+/* Text start*/
+.txc {
+    position: relative;
+    width: 50px;
+    left: 10px;
+    font-size: 10px;}
+
+.ch-Hcontent {
+    position: absolute;
+    top:48px;
+    left:12px;
+    right:12px;
+    font-size: 10px;}
+.ch-Pcontent {
+    position: absolute;
+    top: 81px;
+    left:12px;
+    right:12px;
+    font-size: 10px;}
+/* Text Endt*/
+
+
+@keyframes scroll {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-100%); }}
+    @keyframes colorChange {
+        0%, 100% { color: rgb(1, 5, 7); font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; }
+        33.33% { color: rgb(3, 7, 70); font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; }
+        66.66% { color: rgb(80, 4, 4); font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; }}
+    .scroll-container {
+        white-space: nowrap;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: flex-end; /* Align the text at the bottom of the container */}
+    .scroll-text {
+        display: inline-block;
+        width: max-content;
+        animation: scroll 500s linear infinite, colorChange 70s linear infinite;
+        align-self: flex-end; /* Align text at the bottom of the scroll-text container */}
+/*---------------front scroll---------------------------*/
+@keyframes front-scr {
+        0% { transform: translateX(0%); }
+        100% { transform: translateX(-100%); }}
+    @keyframes colorChange2 {
+        0%, 100% { color: rgb(241, 189, 18); font-family: 'Times New Roman', serif; font-size: 20px; font-weight: bold; }
+        33.33% { color: rgb(247, 0, 0); font-family: 'Times New Roman', serif; font-size: 20px; font-weight: bold; }
+        66.66% { color: rgb(106, 255, 6); font-family: 'Times New Roman', serif; font-size: 20px; font-weight: bold; }}
+    .frnt-scr-frnt {
+        white-space: nowrap;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        display: flex;
+        align-items: flex-end; /* Align the text at the bottom of the container */}
+    .frnt-scr-front-txt {
+        display: inline-block;
+        width: max-content;
+        animation: scroll 500s linear infinite, colorChange2 70s linear infinite;}
+/*---------------Social media Links---------------------------*/
+
+/*---------------images---------------------------*/
+.background-image {
+    width: 180px;
+    height: 252px;}
+
+   .clnder {
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 276px;
+    height: 278px;
+    z-index:10 ;
+                    }
+    .icn{
+        position:absolute;
+        width: 178px;
+        left: 10px;
+        z-index: 9;
+        bot:10
+    }
+
+  .icn-hover :hover {transform: scale(1.03); /* Scale the image by 103% on hover */}
+  /*---------------Zapzone---------------------------*/
+
+
+
+    /*Ifcs*/ 
+    .Ifc {
+        position: absolute;
+        width: 280px; /* Adjusted width to account for gaps between sides */
+        height: 280px; /* Adjusted height to account for gaps between sides */
+        background-color: aquamarine;    
+        z-index: 3;
+        transform-style: preserve-3d;}
+        
+        .InnerTopHorizontal {
+            top: 0;
+            width: 100%;
+            height: 12px;}
+            
+        .InnerBottomHorizontal {
+            bottom: 0;
+            width: 100%;
+            height: 12px;}
+        .InnerLeftVertical {
+            left: 0;
+            width: 12px;
+            height: 100%;
+            writing-mode: vertical-rl;}
+    
+        .InnerRightVertical {
+            right: 0;
+            width: 12px;
+            height: 100%;
+            writing-mode: vertical-rl; }
+    
+        .Ifrnt .InnerTopHorizontal,
+        .Ifrnt .InnerBottomHorizontal,
+        .Ifrnt .InnerLeftVertical,
+        .Ifrnt .InnerRightVertical,
+        .Inrghtin .InnerTopHorizontal,
+        .Inrghtin .InnerBottomHorizontal,    
+        .Inrghtin .InnerLeftVertical,   
+        .Inrghtin .InnerRightVertical,
+        .Inbcktin .InnerTopHorizontal,
+        .Inbcktin .InnerBottomHorizontal,
+        .Inbcktin .InnerLeftVertical,
+        .Inbcktin .InnerRightVertical,
+        .Inlftin .InnerTopHorizontal,
+        .Inlftin .InnerBottomHorizontal,
+        .Inlftin .InnerLeftVertical,
+        .Inlftin .InnerRightVertical,   
+        .Inbttmin .InnerTopHorizontal,
+        .Inbttmin .InnerBottomHorizontal,  
+        .Inbttmin .InnerLeftVertical,
+        .Inbttmin .InnerRightVertical,
+        .Intpin .InnerTopHorizontal,
+        .Intpin .InnerBottomHorizontal,
+        .Intpin .InnerLeftVertical,
+        .Intpin .InnerRightVertical
+         {  position: absolute;
+            font-size: 10px;
+            font-family:verdana;
+            color: white;
+            text-align:center;
+            background-color:rgb(38, 0, 252);
+            z-index: 800; }
+    
+        .plane-container {
+        width: 280px;
+        height: 280px; /* Adjusted height to 10px */
+        position: absolute;
+    
+        left: 50%;
+        top: 50% ;   
+        transform: translate(-50%, -50%);
+        z-index:2;}
+    
+     
+    
+    
+    
+    .Ifrnt {transform: translateZ(140px);}
+    .Inbcktin {transform: translateZ(-140px) rotateY(180deg);}
+    .Inlftin {transform: translateX(-140px) rotateY(-90deg);}
+    .Inrghtin {transform: translateX(140px) rotateY(90deg);}
+    .Intpin {transform: translateY(-140px) rotateX(90deg);}
+    .Inbttmin {transform: translateY(140px) rotateX(-90deg);}
+    /* Cube */
+    #Icb {
+        width: 280px;
+      height: 280px;
+      transform-style: preserve-3d;
+      animation: initialRotation 5s ;
+      transition: transform 0.2s;}
+    .initial-rotation {
+      transform: rotateX(90deg) rotateY(90deg);}
+    @keyframes initialRotation {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg); }
+      100% {
+        transform: rotateX(360deg) rotateY(360deg); }}
+    
+    #Icb-container {
+      perspective: 1200px;
+      width: 280px;
+      height: 280px;
+      margin: auto;
+      position: relative;
+      top: 22px;}
+    #Icb {
+        width: 280px;
+      height: 280px;
+      transform-style: preserve-3d;
+      animation: initialRotation 5s ;
+      transition: transform 0.2s;}
+    .initial-rotation {
+      transform: rotateX(90deg) rotateY(90deg);}
+    @keyframes initialRotation {
+      0% {
+        transform: rotateX(0deg) rotateY(0deg); }
+      100% {
+        transform: rotateX(360deg) rotateY(360deg); }}
+    
+    #cube:hover {
+      animation: none; /* Stop the initial rotation animation on hover */
+      transform: rotateX(0deg) rotateY(0deg); /* Set the cube to its initial position */
+      cursor: pointer; /* Change the cursor to a pointer when hovering over the cube */}
+    @keyframes fall {
+                0% {
+                    transform: perspective(1200px) translate3d(0, 0px, 0px) rotateX(0deg);
+                    transform-origin: bottom;
+                }
+                100% {
+                    transform: perspective(4700px) translate3d(0px,0px, 140px) rotateX(-180deg) ;
+                     transform-origin: bottom;
+                    style:"main-container";
+                    background-color: #000;
+                    opacity:0;
+                    z-index: 1;
+                
+                }}
+    /*---inner--*/
+    /*inside buttons*/  
+     
+    
+    .evBotBan {
+        position: absolute;
+        width: 100%; /* Adjusted width to account for gaps between sides */
+        height: 15%;
+        bottom: 10px; /* Adjusted height to account for gaps between sides */
+        background-color: rgb(255, 185, 127);    
+        z-index: 11;
+    }
+    
+    
+    /*---inner--*/  
+        /* Define a container to hold the column layout */
+        .cntnr {
+                position: absolute;
+                left: 12px; /* Adjust the top position as needed */
+                bottom: 10px; /* Adjust the left position as needed */}
+    
+            .itm {
+                display: flex;
+         
+                margin-bottom: 10px;
+                left: 50px;
+      
+                width:200px;}
+    
+            .nbt {
+                background-color: rgb(231, 31, 31);
+                padding: 2px 8px;}
+            .nbt-hover:hover {
+            transform: scale(0.95);
+    
+            animation: colorChange 2s infinite;
+            color: rgb(248, 208, 30);
+            border-color: #fa0b0b;
+            margin-top: 4px;
+            margin-left: 20 px;}
+            .wrd {
+                background-color:transparent;
+                margin-left: 20px;
+                width:144px;
+                padding: 5px;
+                align-items: center;
+                font-style: verdana;
+                font-size: 20px;}
+    
+    /*inside buttons*/ 
+    /*Buttons*/
+    /*distict buttons with distict features*/
+    .button-column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;}
+    .isub {
+        position: absolute;
+        width: 20px;
+        left: 0px;}
+    
+    
+    .but-c button {
+      margin: 10px 0; /* Adjust the vertical margin as needed */}
+    .FsNb {
+        padding: 4px;
+        width: 100%;
+        right: 10px;}
+     
+     
+        /*distict buttons with distict features*/
+        .bks-butt {
+            left: 15px;
+    
+        }
+       
+       
+        .bks-butt-R {
+            position: absolute;
+        bottom: 20px;
+        right: 15px;
+        left: 13px;
+        height: 20px;
+        z-index: 11;    }
+    /*BS_styles Default*/
+        .button-row {
+            position: absolute;
+            display: flex;
+            justify-content: space-between; /* Distribute buttons evenly */
+    }
+    
+        .custom-button {
+            background-color: rgb(1, 246, 144); /* Background color specified with @CBC@ placeholder */
+            border: 1px solid #0e0d0d;
+            border-radius: 2px;
+            padding: 2px;
+            color: black; /* Text color set to black */
+            font-size: 12px; /* Font size set to 12 */
+            font-family: Arial, sans-serif; /* Easily readable font */
+            font-weight: bold;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            transition: transform 0.2s ease, background-color 0.8s ease, color 0.2s ease, border-color 0.2s ease;
+            text-decoration: none;
+            text-align: center;
+            flex-grow: 1; /* Allow buttons to grow equally within the row */
+            margin-right: 10px;}
+    
+        .custom-button:hover {
+            transform: scale(0.95);
+            background-color: gold;
+            animation: colorChange 2s infinite;
+            color: rgb(0, 0, 0);
+            border-color: rgb(157, 4, 4);}
+    
+        @keyframes colorChange {
+            66% { background-color: darkblue; }
+            100% { background-color: rgb(216, 162, 26); }}
+    
+    
+    /*distict buttons with distict features*/
+    /*Butotns_end*/
+    /* individual button links with distinct features not same as default above*/
+    
+    /* Text start*/
+    .txc {
+        position: relative;
+        width: 50px;
+        left: 10px;
+        font-size: 10px;}
+    
+    .ch-Hcontent {
+        position: absolute;
+        top:48px;
+        left:12px;
+        right:12px;
+        font-size: 10px;}
+    .ch-Pcontent {
+        position: absolute;
+        top: 81px;
+        left:12px;
+        right:12px;
+        font-size: 10px;}
+    /* Text Endt*/
+    
+    
+    @keyframes scroll {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }}
+        @keyframes colorChange {
+            0%, 100% { color: rgb(1, 5, 7); font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; }
+            33.33% { color: rgb(3, 7, 70); font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; }
+            66.66% { color: rgb(80, 4, 4); font-family: 'Times New Roman', serif; font-size: 16px; font-weight: bold; }}
+        .scroll-container {
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: flex-end; /* Align the text at the bottom of the container */}
+        .scroll-text {
+            display: inline-block;
+            width: max-content;
+            animation: scroll 500s linear infinite, colorChange 70s linear infinite;
+            align-self: flex-end; /* Align text at the bottom of the scroll-text container */}
+    /*---------------fifrntscroll---------------------------*/
+    @keyframes front-scr {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }}
+        @keyframes colorChange2 {
+            0%, 100% { color: rgb(241, 189, 18); font-family: 'Times New Roman', serif; font-size: 20px; font-weight: bold; }
+            33.33% { color: rgb(247, 0, 0); font-family: 'Times New Roman', serif; font-size: 20px; font-weight: bold; }
+            66.66% { color: rgb(106, 255, 6); font-family: 'Times New Roman', serif; font-size: 20px; font-weight: bold; }}
+        .frnt-scr-frnt {
+            white-space: nowrap;
+            overflow: hidden;
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: flex-end; /* Align the text at the bottom of the container */}
+        .frnt-scr-front-txt {
+            display: inline-block;
+            width: max-content;
+            animation: scroll 500s linear infinite, colorChange2 70s linear infinite;}
+    /*---------------Social media Links---------------------------*/
+    
+    /*---------------images---------------------------*/
+    .inbcktinground-image {
+        width: 180px;
+        height: 252px;}
+    
+       .clnder {
+        position: absolute;
+        left: 5px;
+        top: 5px;
+        width: 276px;
+        height: 278px;
+        z-index:10 ;
+                        }
+        .icn{
+            position:absolute;
+            width: 178px;
+            left: 10px;
+            z-index: 9;
+            bot:10
+        }
+    
+      .icn-hover :hover {transform: scale(1.03); /* Scale the image by 103% on hover */}
+      /*---------------Zapzone---------------------------*/
+    </style>
+</head>
+<body>
+
+<!--============================================================================================-->
+<div class="background-container"></div>
+<!--============================================================================================-->        
+<div id="cube-container">
+        <div id="cube">
+<!--FS--><div class="front face">
+<!-- Inner container structure ---->
+<div class="InnerTopHorizontal" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+<div class="InnerBottomHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+<div class="InnerLeftVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+<div class="InnerRightVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+
+    <div class="scroll-container" style="position: absolute;top:15px;">
+        <div class="frnt-scr-front-txt">
+        Don't Miss Out, Seize the Deal!
+        Unbeatable Deals Await,Don't Miss Out!
+        Miss It, Miss Out.Grab the Best Deals Here.
+        Your Wallet's Best Friend, Our Deals.
+        The Clock is Ticking ,Grab Your Deal Now!
+        Deals Too Good to Pass Up!
+        Savings So Good, You Can't Say No.
+        Every Bargain Hunter's Paradise.
+        The Deal You've Been Waiting For.
+        Your Savings, Your Way , Don't Miss Out!
+    </div>
+</div>
+
+<a href='https://www.bdna.zapp.zone/OPW' target="_blank"><img class="icn-hover" src="https://docs.google.com/drawings/d/e/2PACX-1vQ0X22WYJkOXjmQI2_MLNRf7sSL18StEpInxUM0JnzzQ5hgUt1hgAVqx-uwNg-wD3m2a4ogfaq4BCSr/pub?w=178&amp;h=256" style="position:absolute;left:10px;bottom:10px;z-index: 11;"></a>   
+<div class="button-collumn but-c" style="z-index:999;position:absolute;right:13px;bottom:10px;">
+<button class="custom-button attention-link FsNb"id="rotateXButtonF2R">One Page Web</button><br>
+<button class="custom-button attention-link FsNb"id="rotateXButtonF2L" >ZappQubes</button><br>
+<button class="custom-button attention-link FsNb"id="rotateXButtonF2B" >Events<br></button><br>
+<button class="custom-button attention-link FsNb"id="rotateXButtonF2T" >Pin Location</button><br>
+<button class="custom-button attention-link FsNb"id="rotateXButtonF2Bot" >Affiliates<br></button><br>
+<button id="rotateXButtonF2Bot" class="fallButton custom-button attention-link FsNb" style="color:black">Open<br></button>          
+ </div></div>
+
+<!--IS--><div class="front face" style="transform: translateZ(143px);position: absolute;width: 288px;height: 288px;">
+            <div class="InnerTopHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+            <div class="InnerBottomHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+            <div class="InnerLeftVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+            <div class="InnerRightVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+    <p9 style="position:absolute;bottom: 38%;z-index: 999;left:12px; font-weight:bold;color: #ff5700;"><br><br>Contact details below:</p9>    
+  
+    <div class="icn icn-hover">
+        <a href='https://www.bdna.zapp.zone' target="_blank">    </a>
+            <img src="https://docs.google.com/drawings/d/e/2PACX-1vQ68Lq94dn1LRHuILoX4Sp-uHZGDjzdAeG5N1W6p1FsnRQ9tNr9KceTJxq3WtOo7C0O9nyqPeDaB3oL/pub?w=145&amp;h=145">
+</div>
+       
+        <div class="button-collumn but-c icn-hover" style="position:absolute;top: 11px;right:11px;height:205px;width: 125px;z-index: 9;background-color:transparent;">
+            <a href='https://www.bdna.zapp.zone' target="_blank">
+                <img src="https://docs.google.com/drawings/d/e/2PACX-1vQ0X22WYJkOXjmQI2_MLNRf7sSL18StEpInxUM0JnzzQ5hgUt1hgAVqx-uwNg-wD3m2a4ogfaq4BCSr/pub?w=125&amp;h=205">
+        </a></div>
+      
+        <div class="cntnr" style="z-index: 999;">
+            <div class="itm">
+                <a class="custom-button attention-link isub" href="https://api.whatsapp.com/send?phone=27671085049&text=Please%20provide%20me%20with%20more%20info%20I%20am%20interested%20in%20this%20service.">📞</a>
+                <div class="wrd txc" style="width:70%;text-align:left;font-weight:bold;font-family: Verdana;font-size: 12px;">067 108 5049</div>
+            </div>
+            <div class="itm">
+                <a class="custom-button attention-link isub" href="https://www.bdna.zapp.zone">🌐</a>
+                <div class="wrd txc" style="width:70%;text-align: center;font-weight:bold;font-family: Verdana;font-size: 12px;">https://www.bdna.zapp.zone</div>
+            </div>
+            <div class="itm">
+                <a class="custom-button attention-link isub" onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=info@zapp.zone');">📧</a>
+                <div class="wrd txc" style="width:70%;text-align: center;font-weight:bold;font-family: Verdana;font-size: 12px;">mailto:info@zapp.zone</div>
+            </div>
+        </div>
+           
+                
+        <button class="fallButton custom-button attention-link FsNb" style="position:absolute;bottom: 12px;right:13px;text-align: center; line-height: 30px;width:55px; color: white; cursor: pointer;z-index:999">
+            Close
+        </button>
+    
+            <!--social media-->
+
+            <!--social media-->
+
+</div>
+
+
+<!--BkS--><div class="face back" style="background-color: orange;">
+    <div class="InnerTopHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+    <div class="InnerBottomHorizontal" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+    <div class="InnerRightVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+    <div class="InnerLeftVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+    <div class="evBotBan"></div>
+    <div class="bgcc" style="position:absolute;left:10;top:12px;z-index: 10;width: 276px;height: 47px;background-color: rgb(255, 55, 0)"></div>
+    <div class="bgcc" style="position:absolute;left:10px;top:13px;font-size: 18px;font-weight:bold;z-index: 11;width: 266px;background-color: rgb(255, 55, 0)"><br>Events to look out for:  <br></div>
+    <div class="button-row bks-butt-R">
+        <!-- Button 1 -->
+        <a href="https://api.whatsapp.com/send?phone=27720219828&text=We would like to know more about the billing solution that EST offers."
+        class="attention-link custom-button bks-butt">More Info</a>
+
+        <!-- Button 2 -->
+        <a href="https://api.whatsapp.com/send?phone=27720219828&text=Please, provide us with a Quote for the billing solution that EST offers.."
+        class="attention-link custom-button bks-butt">Quote</a>
+
+        <!-- Button 3 -->
+        <a href="https://api.whatsapp.com/send?phone=27720219828&text=Where and how do I sign up for the Billing solution."
+        class="attention-link custom-button bks-butt">Sign up</a>
+    </div>
+    <button id="rotateXButtonB2F"class="attention-link custom-button nav" style="position:absolute;top:12px;left:12px;z-index: 999;"> Back</button>                
+        <div class="main-container">
+               <div class="button-container" style="position:absolute;background-color: rgb(63, 205, 181);width:280px;z-index: 3;">
+                <!-- New button row -->
+    
+            <!-- New button row -->
+            <!-- Button Container -->
+
+                <!-- New button row -->
+                
+            <!-- New button row -->
+
+        </div>
+</div>
+            <div class ="clnder" style="position:absolute;width:296px;height:270;left:10px;bottom:1;overflow-x: hidden;overflow-y: hidden;z-index: 8;">
+                <iframe src="https://calendar.google.com/calendar/embed?height=270&wkst=1&bgcolor=%23009688&ctz=Africa%2FJohannesburg&showNav=0&showPrint=0&showCalendars=0&showTabs=0&showTz=0&showTitle=0&src=cmlla2llLmR1dmVuYWdlQHphcHAuem9uZQ&src=Y19kNzFjYzQzY2U1YWEwYzQ3ZmJmM2E0OTExMmUzY2UxZWM4NTRjMzM5MDBiMjBkMzg0NGUzYzU5YzI1MzEyYWUzQGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20&src=YWRkcmVzc2Jvb2sjY29udGFjdHNAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4uc2EjaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23039BE5&color=%237986CB&color=%2333B679&color=%230B8043" style="border:solid 1px #777" width="276" height="270" frameborder="0" scrolling="no"></iframe>
+            </div>
+            <div class="ch-Pcontent"><p10 style="position:absolute;width:100%;top:13px;font-size: 16px;"></p10></div>
+            <!-- Button Container -->
+         
+</div>
+<!--RS--><div class="face right">
+                <div class="InnerTopHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerBottomHorizontal" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerLeftVertical" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerRightVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                    <br><button id="rotateXButtonR2F"class="custom-button attention-link" style="position:absolute;top:12px;right:12px;">  Back</button>
+                                        
+                    <div class="main-container">
+                        <div class="image-container icn-hover" style="position:absolute;right:75px;bottom:62px;width:155px;height:105px;">
+                            <a href='https://www.bdna.zapp.zone/OPW' target="text">
+                                <h22 style="position: relative;top:40%;left: 20px; z-index:9;" href='https://www.bdna.zapp.zone/OPW' target="text">Click Here</h22>
+                                <img src="https://docs.google.com/drawings/d/e/2PACX-1vS69LgVKGi1s13wiRlC2JW1rqgi38yD7w66JUgvG-J5_X0UZQ6x_OqRIrU0pxTv1p-j-HrNVKKmAtsK/pub?w=200&h=150" style="position:absolute;left:12px;z-index:998;">
+                                </a></div>
+                        <div class="OPWH"><h100 style="position:absolute;top:12px;left:12px;z-index:999;font-size: 18px;font-style: verdana;font-weight: bold;text-decoration: underline;">One Page Websites</h100></div>
+                        <div class="OPWP"><p101 style="position:absolute;top:37px;left:14px;z-index:999;font-size: 12px;font-weight:bold;right: 11px;">Your business information in a professional and easy-to-navigate format. Showcase your services or products, with all your social links, and essential customer information on a single, user-friendly page. It's the perfect solution to make a lasting online impression.</p101></div>
+                            
+                        <!-- Button Container -->
+                        <div class="button-container">
+                            <!-- New button row -->
+                            
+                        <!-- New button row -->
+                        <div class="button-row" style="position:absolute;bottom:10px;left:10px;right: 10px;">
+                            <!-- Button 1 -->
+                            <a href="https://api.whatsapp.com/send?phone=27720219828&text=Please provide me with more info we are interested in this service."
+                            class="custom-button attention-link" style="width:100px;font-size: 12px;font-weight: none;text-decoration: none;">One Page</a>
+                
+                            <!-- Button 2 -->
+                            <a href="https://api.whatsapp.com/send?phone=27720219828&text=Please provide us with a Quote."
+                            class="custom-button attention-link" style="width:100px;font-size: 12px;font-weight: none;text-decoration: none;">Custom Website</a>
+                
+                            <!-- Button 3 -->
+                            <a href="https://api.whatsapp.com/send?phone=27720219828&text=Format WhatsApp"
+                            class="custom-button" style="width:100px;font-size: 12px;font-weight: none;text-decoration: none;">Interested</a>
+                        </div>
+                    </div>
+                </div>
+            </div>         
+<!--LS--><div class="face left">
+
+                <div class="InnerTopHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerBottomHorizontal" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerLeftVertical" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerRightVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <button id="rotateXButtonL2F" class="custom-button attention-link" style="position:absolute;top:12px;right:12px;">  Back</button><br>
+                <div class="main-container">
+                    <div class="ch-Hcontent"><h10 style="font-size: 20px;font-style: verdana;font-weight: bold;text-decoration: underline;">ZappQubes</h10></div>
+                    <div class="ch-Pcontent"><p10 style="font-size: 16px;">To take your marketing to the next level, using this platform.<br>Follow Buttons below:</p10></div>
+                    <!-- Button Container -->
+                    <div class="button-container">
+
+                    <div class="button-row" style="position:absolute;left:10px; right: 10px;bottom:20%;width: 288px;">
+                        <!-- Button 1 -->
+                            <a href="https://api.whatsapp.com/send?phone=27720219828&text=Please provide me with more info I am interested in this service."
+                                class="attention-link custom-button">
+                More Info</a>
+                            <!-- Button 2 -->
+                            <a href="https://api.whatsapp.com/send?phone=27720219828&text=Please provide me with a quote for your Realtime accounting solutions."
+                                class="attention-link custom-button">
+                 Qoute   </a>
+
+                    </div>
+                </div>
+            </div>
+        </div>  
+<!--TS--><div class="face top">
+                <!-- Inner container structure -->
+                <div class="InnerTopHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerBottomHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerLeftVertical" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerRightVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="plane-container" >
+                    <iframe style="z-index: 7;"
+                    width=276px;
+                    height=276px;
+                    frameborder="0";
+                    scrolling="no";
+                    marginheight=10px;
+                    marginwidth="0";
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114602.94471710983!2d28.302923774644754!3d-26.15298841037977!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e953eea59df60f3%3A0x619c7f175429a6e0!2sBenoni!5e0!3m2!1sen!2sza!4v1696704639408!5m2!1sen!2sza"
+                    style="border: 1;"
+                    allowfullscreen="no";
+                    loading="lazy";
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>   
+
+                    <button class="attention-link custom-button nav" class="custom-button attention-link" style="position:absolute;top:12px;right:12px;" id="rotateYButtonT2F">Back</button><br> 
+                </div>
+                
+                </div>
+<!--BmS--><div class="face bottom" style="background-color: rgb(10, 245, 128);">
+                <div class="InnerTopHorizontal">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerBottomHorizontal" >&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerLeftVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <div class="InnerRightVertical">&copy; 2023 Zapp.zone. All Rights Reserved</div>
+                <button id="rotateYButtonBot2F"class="custom-button attention-link" style="position:absolute;top:12px;right:12px;">  Back</button><br>
+                <div class="main-container">
+                            <div class="image-container icn-hover">
+                                <a href='https://www.estbs.com' target="_blank">
+                                <img src="https://docs.google.com/drawings/d/e/2PACX-1vRq9ErV6v0tcc-NESnNcukWTRWvaik69N3pByeGXLvKAc3W5WxTIeWCdBJVNu3R6KWoLt6TLC5Jd6Hv/pub?w=250&h=200" alt="Image">
+                                </a></div>
+                            <div class="scroll-container">
+                                <div class="scroll-text">
+                                    Revolutionizing Your Industry with Innovation Unleashed.
+                                    Where Your Product/Service Meets Excellence.
+                                    Elevating Your Industry Standards, One Innovation at a Time.
+                                    Igniting Possibilities, Redefining Your Industry.
+                                    Crafting Your Product/Service for the Extraordinary.
+                                    Not Just Business, It's Your Brand Brilliance.
+                                    Shaping Your Industry's Future, Today.
+                                    Experience Your Brand: Where Quality Reigns Supreme.
+                                    Beyond Expectations, Beyond Imagination – Your Brand.
+                                    Your Journey to Your Industry Leadership Starts Here.
+                                    Innovate, Differentiate, Your Brand.
+                                    Breaking Barriers, Setting Your Industry Trends.
+                                    Experience Innovation: Your Brand's Signature.
+                                    Transforming Your Industry with Your Brand's Vision.
+                                    Trailblazing Your Industry: Embrace the Your Brand Difference.
+                                    Defining Excellence in Your Industry: Your Brand Legacy.
+                                    Elevating Your Industry's Experience, Powered by Your Brand.
+                                    Bold Vision, Bolder Solutions: Your Brand at the Helm.
+                                    Leading Your Industry Innovation: Discover Your Brand.
+                                    Your Industry Journey, Elevated by Your Brand.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>               
+<script>
+    let currentRotationX = 0;
+    let currentRotationY = 0;
+
+    function rotateCube(axis, angle) {
+        const cube = document.getElementById('cube');
+        cube.style.transition = 'transform 1s';
+        switch (axis) {
+            case 'x':
+                currentRotationX += angle;
+                break;
+            case 'y':
+                currentRotationY += angle;
+                break;
+        }
+        cube.style.transform = `rotateX(${currentRotationX}deg) rotateY(${currentRotationY}deg)`;
+        setTimeout(() => {
+            cube.style.transition = '';
+        }, 1000);
+    }
+
+    // Add event listener for the button: from front side to right
+    const rotateXButtonF2R = document.getElementById('rotateXButtonF2R');
+    rotateXButtonF2R.addEventListener('click', () => {
+    // Trigger a 90-degree Y-axis rotation in the opposite direction to go back
+    rotateCube('y', -90);
+    });
+
+    // Add event listener for the button: Back to  front
+    const rotateXButtonR2F = document.getElementById('rotateXButtonR2F');
+    rotateXButtonR2F.addEventListener('click', () => {
+    // Trigger a 90-degree Y-axis rotation in the opposite direction to go back
+    rotateCube('y',90);
+    });
+    
+
+    // Add event listener for the button: from front side to back
+    const rotateXButtonF2B = document.getElementById('rotateXButtonF2B');
+    rotateXButtonF2B.addEventListener('click', () => {
+    // Trigger a 90-degree Y-axis rotation in the opposite direction to go back
+    rotateCube('y', -180);
+    });
+
+    // Add event listener for the button: Back to  front
+    const rotateXButtonB2F = document.getElementById('rotateXButtonB2F');
+    rotateXButtonB2F.addEventListener('click', () => {
+    // Trigger a 90-degree Y-axis rotation in the opposite direction to go back
+    rotateCube('y',180);
+    });
+
+    // Add event listener for the button: from front side to back
+    const rotateXButtonF2L = document.getElementById('rotateXButtonF2L');
+    rotateXButtonF2L.addEventListener('click', () => {
+    // Trigger a 90-degree Y-axis rotation in the opposite direction to go back
+    rotateCube('y', 90);
+    });
+
+    // Add event listener for the button: Back to  front
+    rotateXButtonL2F = document.getElementById('rotateXButtonL2F');
+    rotateXButtonL2F.addEventListener('click', () => {
+    rotateCube('y',-90);
+    });
+//-----------------------------------------------------------------------------
+    // Add event listener for the button: from front side to back
+    const rotateXButtonF2T = document.getElementById('rotateXButtonF2T');
+    rotateXButtonF2T.addEventListener('click', () => {
+        rotateCube('x',-90);
+    });
+
+    // Add event listener for the button: Back to  front
+    rotateYButtonT2F= document.getElementById('rotateYButtonT2F');
+    rotateYButtonT2F.addEventListener('click', () => {
+    rotateCube('x',90);
+    });
+
+    // Add event listener for the button: from front side to back
+    const rotateXButtonF2Bot = document.getElementById('rotateXButtonF2Bot');
+    rotateXButtonF2Bot.addEventListener('click', () => {
+        rotateCube('x',90);
+    });
+    
+    // Add event listener for the button: Back to  front
+    rotateYButtonBot2F= document.getElementById('rotateYButtonBot2F');
+    rotateYButtonBot2F.addEventListener('click', () => {
+    rotateCube('x',-90);
+    });
+    /*-- Add this script to your HTML, preferably before the closing </body> tag --*/
+let isAnimatingForward = true; // Track the animation direction
+let isAnimating = false; // Track whether the animation is in progress
+
+function animateFrontFall() {
+
+
+    const frontFace = document.querySelector('.front');
+    
+    if (isAnimatingForward) {
+        // Play the animation forward
+        frontFace.style.animation = 'fall 2s forwards';
+    } else {
+        // Play the animation in reverse
+        frontFace.style.animation = 'fall-reverse2s forwards';
+    }
+
+    // Toggle the animation direction
+    isAnimatingForward = !isAnimatingForward;
+
+    frontFace.addEventListener('animationend', function () {
+        frontFace.style.animation = 'rotateX(90deg)'; // Reset the animation
+    });}
+// Get all elements with the class "fallButton"
+const buttons = document.querySelectorAll(".fallButton");
+
+buttons.forEach(button => {
+    button.addEventListener("click", animateFrontFall);
+});
+
+</script>
+
+
+</html>

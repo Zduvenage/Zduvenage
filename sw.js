@@ -4,6 +4,7 @@ self.addEventListener('install', event => {
             return cache.addAll([
                 '/',
                 '/index.html',
+                '/QQ.html',
                 '/manifest.json',
                 // Add other files you want to cache
             ]);
